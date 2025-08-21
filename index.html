@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TheVuntgram - Информация о платформе</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #32b167e2; 
+            --secondary: #8fc9a8; 
+            --accent: #3498DB; 
+            --light-accent: #AED6F1; 
+            --dark: #2C3E50;
+            --light: #F8F9FC;
+            --text: #333333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: white;
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            padding: 30px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+        }
+
+        header.scrolled {
+            padding: 15px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-circle {
+            width: 12px;
+            height: 12px;
+            background: var(--primary);
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .hero {
+            padding: 180px 0 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 650px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 60px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            color: var(--dark);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 1s forwards 0.5s;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            color: #555;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 1s forwards 0.8s;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 1s forwards 1.1s;
+        }
+
+        .btn {
+            padding: 14px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 14px rgba(46, 204, 113, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(46, 204, 113, 0.5);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .floating-shapes {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            opacity: 0.7;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.4;
+        }
+
+        .shape-1 {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            top: 10%;
+            right: 10%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .shape-2 {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(45deg, var(--accent), var(--light-accent));
+            top: 50%;
+            right: 20%;
+            animation: float 10s ease-in-out infinite 1s;
+        }
+
+        .shape-3 {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(45deg, var(--secondary), var(--primary));
+            bottom: 10%;
+            right: 30%;
+            animation: float 12s ease-in-out infinite 2s;
+        }
+
+        .features {
+            padding: 100px 0;
+            background: var(--light);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 40px;
+            color: var(--dark);
+            margin-bottom: 15px;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .section-title.animate h2 {
+            animation: fadeUp 1s forwards;
+        }
+
+        .section-title p {
+            font-size: 18px;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .section-title.animate p {
+            animation: fadeUp 1s forwards 0.3s;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 16px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .feature-card.animate {
+            animation: fadeUp 0.8s forwards;
+        }
+
+        .feature-card:nth-child(2).animate {
+            animation-delay: 0.2s;
+        }
+
+        .feature-card:nth-child(3).animate {
+            animation-delay: 0.4s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: rgba(46, 204, 113, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+
+        .feature-icon svg {
+            width: 32px;
+            height: 32px;
+            fill: var(--primary);
+        }
+
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .feature-card p {
+            color: #666;
+        }
+
+        .support-section {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .support-content {
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .support-content.animate {
+            animation: fadeUp 1s forwards;
+        }
+
+        .support-content h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .support-content p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: #666;
+        }
+
+        .telegram-link {
+            display: inline-flex;
+            align-items: center;
+            background: var(--accent);
+            color: white;
+            padding: 14px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 14px rgba(52, 152, 219, 0.4);
+        }
+
+        .telegram-link:hover {
+            background: #2980B9;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.5);
+        }
+
+        .telegram-link svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            fill: white;
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 50px 0 30px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .footer-logo {
+            font-size: 22px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .footer-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-left: 25px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 40px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .footer-links {
+                margin-top: 20px;
+                justify-content: center;
+            }
+            
+            .footer-links li {
+                margin: 0 10px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+<div class="logo">
+    <img src="https://s14.gifyu.com/images/bNttS.png" class="logo-icon" alt="TheVuntgram" style="width: 40px; height: 40px; margin-right: 10px;">
+    TheVuntgram
+</div>
+            <ul class="nav-links">
+                <li><a href="#">Главная</a></li>
+                <li><a href="#features">О платформе</a></li>
+                <li><a href="#support">Поддержка</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Социальная сеть для школьников</h1>
+            <p>TheVuntgram — это частная социальная сеть, предназначенная для школьников из различных государственных и частных учебных заведений.</p>
+            <div class="hero-buttons">
+                <a href="https://t.me/VuntgramBot" class="btn btn-primary">Регистрация</a>
+            </div>
+        </div>
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Уникальные возможности</h2>
+                <p>Платформа, созданная специально для безопасного общения школьников</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M12 1c-6.338 0-12 4.226-12 10.007 0 2.05.739 4.063 2.047 5.625.055 1.83-1.023 4.456-1.993 6.368 2.602-.47 6.301-1.508 7.978-2.967 1.833.547 3.873.943 5.969.943 6.338 0 12-4.226 12-10.007 0-5.781-5.662-10.007-12-10.007zm0 17.5c-1.992 0-3.91-.43-5.697-1.217l-.301-.172-2.715.769.971-2.529-.223-.282c-1.478-1.738-2.256-3.782-2.256-5.817 0-4.542 4.477-7.493 10-7.493s10 2.951 10 7.493c0 4.542-4.477 7.493-10 7.493z"/>
+                        </svg>
+                    </div>
+                    <h3>Безопасное общение</h3>
+                    <p>Пользователи могут общаться между собой, добавляя друг друга по уникальному ID платформы. Все коммуникации защищены, а личные данные не раскрываются третьим лицам.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M9 12l2 2 4-4m5.618-4.016a11.955 11.955 0 0 1-2.862 7.58c-.66.67-1.34 1.16-2.044 1.46a5.01 5.01 0 0 1-7.009-1.788 5.011 5.011 0 0 1 1.788-7.009c.3-.704.79-1.384 1.46-2.044a11.955 11.955 0 0 1 7.58-2.862c.663 0 1.299.048 1.911.138a1.003 1.003 0 0 1 .861 1.216c-.14.6-.456 1.055-.841 1.44-.385.385-.84.701-1.44.841-.305.071-.638.107-.979.107z"/>
+                        </svg>
+                    </div>
+                    <h3>Закрытая платформа</h3>
+                    <p>Чтобы зарегистрироваться, необходимо получить пригласительный код. Каждое учебное заведение имеет свой уникальный код, что ограничивает доступ посторонних.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M17 10h-4v-4c0-.552-.448-1-1-1s-1 .448-1 1v4h-4c-.552 0-1 .448-1 1s.448 1 1 1h4v4c0 .552.448 1 1 1s1-.448 1-1v-4h4c.552 0 1-.448 1-1s-.448-1-1-1z"/>
+                        </svg>
+                    </div>
+                    <h3>Для школьников</h3>
+                    <p>TheVuntgram разрабатывалась специально для школьников, обеспечивая пространство для общения, обмена знаниями и совместного участия в учебных и внеучебных проектах.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="support" class="support-section">
+        <div class="container">
+            <div class="support-content">
+                <h2>Нужна помощь?</h2>
+                <p>Наша команда поддержки всегда готова ответить на ваши вопросы и помочь с любыми проблемами, которые могут возникнуть при использовании платформы.</p>
+                <a href="https://t.me/VuntgramSupportBot" class="telegram-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.14.141-.259.259-.374.261l.213-3.053 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.658-.64.136-.954l11.566-4.458c.538-.196 1.006.128.832.941z"/>
+                    </svg>
+                    Поддержка TheVuntgram
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">TheVuntgram</div>
+                <ul class="footer-links">
+                    <li><a href="#">О нас</a></li>
+                    <li><a href="#">Конфиденциальность</a></li>
+                    <li><a href="#">Условия использования</a></li>
+                </ul>
+            </div>
+            <div class="copyright">
+                &copy; 2025 TheVuntgram. Все права защищены.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const header = document.querySelector('header');
+            const sectionTitle = document.querySelector('.section-title');
+            const featureCards = document.querySelectorAll('.feature-card');
+            const supportContent = document.querySelector('.support-content');
+            
+            // Анимация хедера при скролле
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+                
+                // Анимация секции features при прокрутке
+                const sectionTitlePosition = sectionTitle.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (sectionTitlePosition < screenPosition) {
+                    sectionTitle.classList.add('animate');
+                    
+                    featureCards.forEach(card => {
+                        card.classList.add('animate');
+                    });
+                }
+                
+                // Анимация секции поддержки
+                const supportPosition = supportContent.getBoundingClientRect().top;
+                
+                if (supportPosition < screenPosition) {
+                    supportContent.classList.add('animate');
+                }
+            });
+
+            // Плавная прокрутка для навигации
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    if (this.getAttribute('href') === '#') return;
+                    
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
