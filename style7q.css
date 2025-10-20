@@ -82,7 +82,7 @@ nav{flex:1;margin-left:18px}
   height:36px;
   border-radius:50%; 
   margin-left:8px; 
-  background-image:url("imgft/kr1.jpg")
+  background-image:url("kr1.jpg")
 }
 
 /* area with background image (chat wallpaper) */
@@ -92,7 +92,7 @@ nav{flex:1;margin-left:18px}
 }
 /* background image via pseudo-element so messages can overlay */
 .phone-chat::before{
-  content:"";position:absolute;inset:0;background-image:url('imgft/photo_5406700442651588380_y.jpg');
+  content:"";position:absolute;inset:0;background-image:url('photo_5406700442651588380_y.jpg');
   background-position:center;background-size:cover;opacity:1;filter:contrast(.95) brightness(1);
   transition: filter .45s ease, opacity .45s ease;z-index:0;
 }
