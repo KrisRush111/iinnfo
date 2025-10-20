@@ -10,11 +10,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const saved = localStorage.getItem('theme'); // 'dark' или 'gray' (или null)
   if (saved === 'dark') {
     body.classList.add('dark');
-    logo.src = 'imgft/2qq.png'; // белая иконка для тёмной темы
+    logo.src = '2qq.png'; // белая иконка для тёмной темы
     themeBtn.textContent = '☀️';
   } else {
     body.classList.remove('dark');
-    logo.src = 'imgft/32.png'; // чёрная иконка для светлой/серой темы
+    logo.src = '32.png'; // чёрная иконка для светлой/серой темы
     themeBtn.textContent = '🌙';
   }
 
@@ -22,11 +22,11 @@ document.addEventListener('DOMContentLoaded', () => {
   themeBtn.addEventListener('click', () => {
     const isDark = body.classList.toggle('dark');
     if (isDark) {
-      logo.src = 'imgft/2qq.png';
+      logo.src = '2qq.png';
       themeBtn.textContent = '☀️';
       localStorage.setItem('theme', 'dark');
     } else {
-      logo.src = 'imgft/32.png';
+      logo.src = '32.png';
       themeBtn.textContent = '🌙';
       localStorage.setItem('theme', 'gray');
     }
