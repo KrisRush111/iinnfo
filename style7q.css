@@ -135,8 +135,8 @@ nav{flex:1;margin-left:18px}
 }
 
 .phone-frame {
-  width: 360px; /* Фиксированная ширина */
-  height: 640px; /* Фиксированная высота */
+  width: 360px;
+  height: 700px; /* Увеличили высоту для более вытянутого вида */
   border-radius: 28px;
   border: 8px solid var(--phone-border);
   box-shadow: 0 14px 40px var(--shadow);
@@ -152,23 +152,21 @@ nav{flex:1;margin-left:18px}
   transform: translateY(-6px);
 }
 
-/* Адаптивность для мобильных */
+/* На мобильных делаем ЕЩЕ больше и вытянутее */
 @media (max-width: 768px) {
   .phone-frame {
-    width: 320px; /* Немного уменьшаем для мобильных */
-    height: 568px; /* Сохраняем пропорции */
-    transform: scale(0.95); /* Легкое масштабирование если нужно */
+    width: 340px; /* Чуть шире чем было */
+    height: 750px; /* Значительно увеличиваем высоту */
   }
 }
 
 @media (max-width: 420px) {
   .phone-frame {
-    width: 300px;
-    height: 533px;
-    transform: scale(0.9);
+    width: 320px;
+    height: 720px;
+    transform: scale(0.95); /* Легкое уменьшение для очень маленьких экранов */
   }
 }
-
 
 
 
