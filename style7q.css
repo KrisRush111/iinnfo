@@ -136,7 +136,7 @@ nav{flex:1;margin-left:18px}
 
 .phone-frame {
   width: 360px;
-  height: 700px; /* Увеличили высоту для более вытянутого вида */
+  height: 600px; /* Увеличили высоту для более вытянутого вида */
   border-radius: 28px;
   border: 8px solid var(--phone-border);
   box-shadow: 0 14px 40px var(--shadow);
@@ -163,8 +163,7 @@ nav{flex:1;margin-left:18px}
 @media (max-width: 420px) {
   .phone-frame {
     width: 320px;
-    height: 720px;
-    transform: scale(0.95); /* Легкое уменьшение для очень маленьких экранов */
+    height: 600px;
   }
 }
 
