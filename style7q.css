@@ -92,7 +92,7 @@ nav{flex:1;margin-left:18px}
 .avatar{width:36px;height:36px;border-radius:50%;background:var(--primary);margin-left:8px;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
 
-/* area with background image (chat wallpaper) */
+
 .phone-chat{
   flex:1;
   padding:14px;
@@ -102,7 +102,6 @@ nav{flex:1;margin-left:18px}
   overflow:auto;
   position:relative;
   -webkit-overflow-scrolling: touch;
-  /* Добавляем обрезку содержимого */
   overflow: hidden;
 }
 
@@ -114,20 +113,19 @@ nav{flex:1;margin-left:18px}
   left:0;
   right:0;
   bottom:0;
-  background-image:url('photo_5406700442651588380_y.jpg'); /* ваше изображение */
+  background-image:url('photo_5406700442651588380_y.jpg'); 
   background-position:center;
-  background-size:cover; /* ключевое свойство - покрывает всю область */
+  background-size:cover; 
   background-repeat:no-repeat;
   opacity:1;
   filter:contrast(.95) brightness(1);
   transition: filter .45s ease, opacity .45s ease;
   z-index:0;
-  /* Гарантируем, что фон не выходит за границы */
-  border-radius: 0; /* убираем скругление если нужно */
+  border-radius: 0;
 }
 
 
-/* ===== phone demo ===== */
+
 .phone-demo-wrapper {
   display: flex;
   justify-content: center;
@@ -136,7 +134,7 @@ nav{flex:1;margin-left:18px}
 
 .phone-frame {
   width: 360px;
-  height: 600px; /* Увеличили высоту для более вытянутого вида */
+  height: 680px;
   border-radius: 28px;
   border: 8px solid var(--phone-border);
   box-shadow: 0 14px 40px var(--shadow);
@@ -152,11 +150,11 @@ nav{flex:1;margin-left:18px}
   transform: translateY(-6px);
 }
 
-/* На мобильных делаем ЕЩЕ больше и вытянутее */
+
 @media (max-width: 768px) {
   .phone-frame {
-    width: 340px; /* Чуть шире чем было */
-    height: 750px; /* Значительно увеличиваем высоту */
+    width: 340px; 
+    height: 750px; 
   }
 }
 
