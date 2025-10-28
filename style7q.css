@@ -127,6 +127,51 @@ nav{flex:1;margin-left:18px}
 }
 
 
+/* ===== phone demo ===== */
+.phone-demo-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 28px 0 40px;
+}
+
+.phone-frame {
+  width: 360px; /* Фиксированная ширина */
+  height: 640px; /* Фиксированная высота */
+  border-radius: 28px;
+  border: 8px solid var(--phone-border);
+  box-shadow: 0 14px 40px var(--shadow);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: var(--section-bg);
+  transition: transform .35s ease, box-shadow .25s ease;
+  animation: fadeUp .9s ease;
+}
+
+.phone-frame:hover {
+  transform: translateY(-6px);
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 768px) {
+  .phone-frame {
+    width: 320px; /* Немного уменьшаем для мобильных */
+    height: 568px; /* Сохраняем пропорции */
+    transform: scale(0.95); /* Легкое масштабирование если нужно */
+  }
+}
+
+@media (max-width: 420px) {
+  .phone-frame {
+    width: 300px;
+    height: 533px;
+    transform: scale(0.9);
+  }
+}
+
+
+
+
 /* затемнение/стилизация в тёмной теме */
 body.dark .phone-chat::before{filter:brightness(.28) saturate(.9);}
 
@@ -178,17 +223,14 @@ body.dark .faq h2 { color: var(--text); }
 /* ===== адаптив ===== */
 @media (max-width:1024px){
   .features-grid{grid-template-columns:repeat(2,1fr)}
-  .phone-frame{width:min(320px,86vw);aspect-ratio:9/16}
 }
 @media (max-width:768px){
   .nav-links{display:none}
   .burger{display:inline-block}
-  .phone-frame{width:88%;height:auto;aspect-ratio:9/16}
   .features-grid{grid-template-columns:1fr}
   .hero-title{font-size:22px}
 }
 @media (max-width:420px){
-  .phone-frame{height:auto}
   .hero-sub{font-size:14px}
   .header-inner{padding:8px 0}
 }
