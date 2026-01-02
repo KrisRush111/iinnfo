@@ -92,88 +92,31 @@ nav{flex:1;margin-left:18px}
 .avatar{width:36px;height:36px;border-radius:50%;background:var(--primary);margin-left:8px;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
 
-
+/* area with background image (chat wallpaper) */
 .phone-chat{
-  flex:1;
-  padding:14px;
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-  overflow:auto;
-  position:relative;
-  -webkit-overflow-scrolling: touch;
-  overflow: hidden;
+  flex:1;padding:14px;display:flex;flex-direction:column;gap:8px;overflow:auto;position:relative;
+  -webkit-overflow-scrolling: touch; 
 }
-
-/* Фон чата */
+/* фон — псевдоэлемент, чтобы сообщения на него накладывались */
 .phone-chat::before{
   content:"";
-  position:absolute;
-  top:0;
-  left:0;
-  right:0;
-  bottom:0;
-  background-image:url('photo_5406700442651588380_y.jpg'); 
+  position:absolute;inset:0;
+  background-image:url('фон.webp');
   background-position:center;
-  background-size:cover; 
+  background-size:cover;
   background-repeat:no-repeat;
   opacity:1;
   filter:contrast(.95) brightness(1);
   transition: filter .45s ease, opacity .45s ease;
   z-index:0;
-  border-radius: 0;
 }
-
-
-
-.phone-demo-wrapper {
-  display: flex;
-  justify-content: center;
-  padding: 28px 0 40px;
-}
-
-.phone-frame {
-  width: 360px;
-  height: 680px;
-  border-radius: 28px;
-  border: 8px solid var(--phone-border);
-  box-shadow: 0 14px 40px var(--shadow);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  background: var(--section-bg);
-  transition: transform .35s ease, box-shadow .25s ease;
-  animation: fadeUp .9s ease;
-}
-
-.phone-frame:hover {
-  transform: translateY(-6px);
-}
-
-
-@media (max-width: 768px) {
-  .phone-frame {
-    width: 340px; 
-    height: 750px; 
-  }
-}
-
-@media (max-width: 420px) {
-  .phone-frame {
-    width: 320px;
-    height: 600px;
-  }
-}
-
-
-
 /* затемнение/стилизация в тёмной теме */
 body.dark .phone-chat::before{filter:brightness(.28) saturate(.9);}
 
 /* сообщения поверх фонa */
 .message{position:relative;z-index:2;max-width:72%;padding:10px 14px;border-radius:16px;opacity:0;transform:translateY(18px);box-shadow:0 6px 18px rgba(0,0,0,0.06);font-size:15px;line-height:1.25}
 .message.left{align-self:flex-start;background:rgba(255,255,255,0.95);color:black;border-bottom-left-radius:4px}
-.message.right{align-self:flex-end;background:var(--primary);color:#fff;border-bottom-right-radius:4px}
+.message.right{align-self:flex-end;background:#a043fd;color:#fff;border-bottom-right-radius:4px}
 .message:nth-child(1){animation:msgShow .6s .6s forwards}
 .message:nth-child(2){animation:msgShow .6s 2.0s forwards}
 .message:nth-child(3){animation:msgShow .6s 3.4s forwards}
@@ -218,14 +161,555 @@ body.dark .faq h2 { color: var(--text); }
 /* ===== адаптив ===== */
 @media (max-width:1024px){
   .features-grid{grid-template-columns:repeat(2,1fr)}
+  .phone-frame{width:min(320px,86vw);aspect-ratio:9/16}
 }
 @media (max-width:768px){
   .nav-links{display:none}
   .burger{display:inline-block}
+  .phone-frame{width:88%;height:auto;aspect-ratio:9/16}
   .features-grid{grid-template-columns:1fr}
   .hero-title{font-size:22px}
 }
 @media (max-width:420px){
+  .phone-frame{height:auto}
   .hero-sub{font-size:14px}
   .header-inner{padding:8px 0}
 }
+/* ====== Install big-card and ripple hover (ADD to style7q.css) ====== */
+
+.install-block.big-card{
+  margin:22px 0 6px;
+  padding:18px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(250,250,250,0.9));
+  border-radius:12px;
+  border:1px solid rgba(0,0,0,0.04);
+  box-shadow:0 8px 30px rgba(0,0,0,0.04);
+  display:block;
+}
+
+body.dark .install-block.big-card{
+  background:linear-gradient(180deg, rgba(27,27,28,0.85), rgba(18,18,19,0.85));
+  border:1px solid rgba(255,255,255,0.03);
+  box-shadow:0 8px 30px rgba(0,0,0,0.7);
+}
+
+.install-inner{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.install-left{display:flex;align-items:center;gap:12px}
+.install-icon{font-size:36px}
+.install-title{font-weight:700;font-size:16px;color:var(--text)}
+.install-sub{color:var(--muted);font-size:13px;margin-top:4px}
+
+/* CTA button */
+.install-cta{display:flex;align-items:center}
+.btn.install-btn{
+  --btn-h:48px;
+  height:var(--btn-h);
+  padding:0 22px;
+  font-weight:800;
+  font-size:15px;
+  border-radius:999px;
+  border:0;
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:160px;
+  transition: background .42s ease, color .42s ease, box-shadow .22s;
+  background:var(--primary);
+  color:#fff;
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
+}
+
+/* Inverted (final state after fill) -> white bg, green text */
+.btn.install-btn.inverted{
+  background:#fff;
+  color:var(--primary);
+  box-shadow:0 10px 30px rgba(0,0,0,0.06);
+}
+
+/* ripple element */
+.btn.install-btn .ripple {
+  position:absolute;
+  border-radius:50%;
+  transform:translate(-50%,-50%) scale(0);
+  pointer-events:none;
+  background: #ffffff;
+  opacity:0.95;
+  transition: transform 0.9s cubic-bezier(.2,.9,.3,1), opacity .8s ease;
+  will-change: transform, opacity;
+  z-index:1;
+}
+
+/* for dark theme, ripple should be lighter -> invert color */
+body.dark .btn.install-btn .ripple{
+  background: #ffffff; /* still white so it creates visible fill on dark */
+}
+
+/* ensure button content sits above ripple */
+.btn.install-btn > *{ position:relative; z-index:2 }
+
+/* hover/active subtle scale */
+.btn.install-btn:hover{ transform:translateY(-2px); }
+
+/* responsive */
+@media (max-width:600px){
+  .install-inner{flex-direction:column;align-items:flex-start;gap:12px}
+  .install-cta{width:100%}
+  .btn.install-btn{width:100%;min-width:unset}
+}
+.inside-showcase {
+  text-align: center;
+  padding: 80px 0;
+}
+
+.carousel-3d {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  perspective: 1200px;
+  max-width: 900px;
+  margin: 250px auto;
+}
+
+.carousel-3d img {
+  position: absolute;
+  width: 840px;
+  height: auto;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.8s ease;
+  pointer-events: none;
+}
+
+.carousel-3d img.left {
+  opacity: 1;
+  transform: translateX(-220px) scale(0.9) rotateY(25deg);
+  z-index: 1;
+}
+
+.carousel-3d img.center {
+  opacity: 1;
+  transform: translateX(0) scale(1.1);
+  z-index: 2;
+}
+
+.carousel-3d img.right {
+  opacity: 1;
+  transform: translateX(220px) scale(0.9) rotateY(-25deg);
+  z-index: 1;
+}
+.about-abilities {
+  text-align: center;
+  max-width: 900px;
+  margin: 40px auto 40px auto;
+  padding: 0 20px;
+}
+.about-abilities strong{
+  color: #2ecc71;
+}
+.about-abilities h2 {
+  color: #2ecc71;
+  font-size: 2rem;
+  margin-bottom: 25px;
+}
+
+.about-abilities p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--text);
+  margin-bottom: 20px;
+  text-align: justify;
+}
+.support-section {
+  text-align: center;
+  padding: 80px 0;
+}
+
+.support-intro {
+  max-width: 850px;
+  margin: 0 auto 40px auto;
+  font-size: 1.1rem;
+  color: #444;
+  line-height: 1.6;
+}
+
+.support-methods {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.support-item {
+  background: var(--card-bg);
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+}
+
+.support-item p{
+  color: var(--text) ;
+}
+
+.support-item:hover {
+  transform: translateY(-6px);
+}
+
+.support-item h3 {
+  color: #2ecc71;
+  margin-bottom: 10px;
+}
+
+.support-link {
+  display: inline-block;
+  color: #2ecc71;
+  font-weight: 600;
+  text-decoration: none;
+  margin-top: 5px;
+}
+
+.support-link:hover {
+  text-decoration: underline;
+}
+
+.support-note {
+  margin-top: 40px;
+  background: var(--card-bg);
+  border-left: 4px solid #f1c40f;
+  padding: 15px 20px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  color: #29c45a;
+}
+
+
+@media (max-width: 768px) {
+  
+  /* Улучшаем навигацию */
+  .mobile-nav {
+    width: 90%;
+    right: 5%;
+    top: 70px;
+  }
+  
+  /* Геро-секция на мобильных */
+  .hero {
+    padding: 30px 0 20px;
+  }
+  
+  .hero-title {
+    font-size: 24px;
+    padding: 0 15px;
+  }
+  
+  .hero-sub {
+    font-size: 15px;
+    padding: 0 15px;
+    line-height: 1.5;
+  }
+  
+  /* Демо телефона на мобильных */
+  .phone-demo-wrapper {
+    padding: 20px 0 30px;
+  }
+  
+  .phone-frame {
+    width: 280px;
+    aspect-ratio: 9/16;
+  }
+  
+  .phone-chat {
+    padding: 10px;
+  }
+  
+  .message {
+    max-width: 80%;
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+  
+  /* Секция возможностей */
+  .about-abilities {
+    padding: 0 15px;
+    margin: 30px auto;
+  }
+  
+  .about-abilities p {
+    font-size: 15px;
+    text-align: left;
+  }
+  
+  /* Карусель 3D для мобильных */
+  .carousel-3d {
+    margin: 180px auto 100px;
+    perspective: 800px;
+    height: 300px;
+  }
+  
+  /* Показываем только мобильные скриншоты на телефонах */
+  .carousel-3d .desktop-screenshot {
+    display: none !important;
+  }
+  
+  .carousel-3d .mobile-screenshot {
+    display: block !important;
+    width: 180px !important;
+    height: auto;
+  }
+  
+  .carousel-3d img.left {
+    transform: translateX(-120px) scale(0.8) rotateY(20deg);
+  }
+  
+  .carousel-3d img.center {
+    transform: translateX(0) scale(1);
+  }
+  
+  .carousel-3d img.right {
+    transform: translateX(120px) scale(0.8) rotateY(-20deg);
+  }
+  
+  /* Секция установки */
+  .install-block.big-card {
+    margin: 20px 10px;
+    padding: 15px;
+  }
+  
+  .install-icon {
+    font-size: 28px;
+  }
+  
+  .install-title {
+    font-size: 15px;
+  }
+  
+  .install-sub {
+    font-size: 12px;
+  }
+  
+  /* FAQ на мобильных */
+  .faq-item {
+    margin-bottom: 8px;
+  }
+  
+  .faq-question {
+    padding: 12px 14px;
+    font-size: 14px;
+  }
+  
+  /* Секция поддержки */
+  .support-section {
+    padding: 50px 0;
+  }
+  
+  .support-intro {
+    padding: 0 15px;
+    font-size: 15px;
+  }
+  
+  .support-item {
+    padding: 20px;
+    margin: 0 15px 20px;
+  }
+  
+  .support-note {
+    margin: 30px 15px;
+    padding: 12px 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  
+  /* Ещё более компактно для маленьких экранов */
+  .hero-title {
+    font-size: 22px;
+  }
+  
+  .hero-sub {
+    font-size: 14px;
+  }
+  
+  .phone-frame {
+    width: 260px;
+  }
+  
+  .features-grid {
+    gap: 10px;
+  }
+  
+  .feature-card {
+    padding: 15px;
+    font-size: 14px;
+  }
+  
+  /* Карусель для очень маленьких экранов */
+  .carousel-3d {
+    margin: 150px auto 80px;
+    height: 250px;
+  }
+  
+  .carousel-3d .mobile-screenshot {
+    width: 150px !important;
+  }
+  
+  .carousel-3d img.left {
+    transform: translateX(-100px) scale(0.75) rotateY(15deg);
+  }
+  
+  .carousel-3d img.right {
+    transform: translateX(100px) scale(0.75) rotateY(-15deg);
+  }
+  
+  /* Улучшаем читаемость текста */
+  body {
+    font-size: 15px;
+  }
+  
+  .container {
+    padding: 0 12px;
+  }
+  
+  /* Футер */
+  .site-footer {
+    padding: 15px 0;
+    font-size: 13px;
+  }
+}
+
+/* Для очень маленьких экранов (менее 360px) */
+@media (max-width: 360px) {
+  .phone-frame {
+    width: 240px;
+  }
+  
+  .carousel-3d .mobile-screenshot {
+    width: 130px !important;
+  }
+  
+  .carousel-3d img.left {
+    transform: translateX(-90px) scale(0.7);
+  }
+  
+  .carousel-3d img.right {
+    transform: translateX(90px) scale(0.7);
+  }
+  
+  .btn {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+}
+
+/* Специальные стили для планшетов */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .carousel-3d {
+    margin: 200px auto 120px;
+  }
+  
+  .carousel-3d img {
+    width: 600px;
+  }
+  
+  .carousel-3d img.left {
+    transform: translateX(-180px) scale(0.85);
+  }
+  
+  .carousel-3d img.right {
+    transform: translateX(180px) scale(0.85);
+  }
+  
+  /* На планшетах показываем десктопные скриншоты */
+  .carousel-3d .mobile-screenshot {
+    display: none !important;
+  }
+  
+  .carousel-3d .desktop-screenshot {
+    display: block !important;
+  }
+}
+
+/* На десктопах показываем только десктопные скриншоты */
+@media (min-width: 1025px) {
+  .carousel-3d .mobile-screenshot {
+    display: none !important;
+  }
+  
+  .carousel-3d .desktop-screenshot {
+    display: block !important;
+  }
+}
+
+/* Улучшаем touch-взаимодействие на мобильных */
+@media (hover: none) and (pointer: coarse) {
+  .btn:hover {
+    transform: none;
+  }
+  
+  .phone-frame:hover {
+    transform: none;
+  }
+  
+  .feature-card:hover,
+  .support-item:hover {
+    transform: none;
+  }
+  
+  /* Увеличиваем тап-зоны для мобильных */
+  .nav-links li a,
+  .faq-question,
+  .btn {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .phone-input input {
+    min-height: 44px;
+  }
+  
+  .phone-input .send {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+/* Предотвращаем слишком маленький текст на iOS */
+@media (max-width: 768px) {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+}
+
+/* Анимация появления для мобильных элементов */
+@media (max-width: 768px) {
+  .hero-inner,
+  .phone-frame,
+  .features-grid,
+  .about-abilities {
+    animation: fadeInUpMobile 0.6s ease;
+  }
+  
+  @keyframes fadeInUpMobile {
+    from {
+      opacity: 0;
+      transform: translateY(15px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
