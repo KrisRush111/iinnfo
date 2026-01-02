@@ -260,7 +260,7 @@ if (carousel) {
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimeout);
     resizeTimeout = setTimeout(() => {
-      location.reload(); // Простейший способ - перезагрузить при изменении размера
+      updatePositions();
     }, 250);
   });
 
