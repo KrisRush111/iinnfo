@@ -3,18 +3,30 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>TheVuntgram</title>
+  <title>TheVuntgram — частная соцсеть для школьников</title>
+  <meta name="description" content="TheVuntgram — приватный мессенджер для школьников и студентов. Вход по пригласительному коду, внутренняя почта @vibe.ye, без рекламы и посторонних." />
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="style7q.css">
 </head>
 <body>
-  <header class="site-header">
+  <!-- живой фон: плавающие световые пятна -->
+  <div class="bg-aurora" aria-hidden="true">
+    <span class="blob blob-1"></span>
+    <span class="blob blob-2"></span>
+    <span class="blob blob-3"></span>
+    <span class="grid-overlay"></span>
+  </div>
+
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+  <header class="site-header" id="siteHeader">
     <div class="header-inner container">
-      <div class="logo">
-        <img id="app-logo" src="32.png" alt="" />
+      <a class="logo" href="#about">
+        <img id="app-logo" src="32.png" alt="TheVuntgram" />
         <span class="brand">TheVuntgram</span>
-      </div>
+      </a>
 
       <nav>
         <ul class="nav-links">
@@ -22,190 +34,401 @@
           <li><a href="#features">Возможности</a></li>
           <li><a href="#faq">FAQ</a></li>
           <li><a href="#support">Поддержка</a></li>
-          <li><a href="#carousel-3d" target="_blank" rel="noopener">Установить</a></li>
-          <li><a href="https://t.me/VuntgramBot">Регистрация</a><li>
+          <li><a href="#carousel-3d">Установить</a></li>
+          <li><a class="nav-cta" href="https://t.me/VuntgramBot" target="_blank" rel="noopener">Регистрация</a></li>
         </ul>
       </nav>
 
       <div class="controls">
         <button id="theme-toggle" class="theme-btn" aria-label="Переключить тему">🌙</button>
-        <button id="burger" class="burger" aria-label="Открыть меню">☰</button>
+        <button id="burger" class="burger" aria-label="Открыть меню"><span></span><span></span><span></span></button>
       </div>
     </div>
+
     <div class="mobile-nav" id="mobileNav" aria-hidden="true">
       <ul>
         <li><a href="#about">О платформе</a></li>
         <li><a href="#features">Возможности</a></li>
         <li><a href="#faq">FAQ</a></li>
         <li><a href="#support">Поддержка</a></li>
-        <li><a href="https://t.me/VuntgramBot">Регистрация</a></li>
-        <li><a href="#carousel-3d" target="_blank" rel="noopener">Установить</a></li>
+        <li><a href="#carousel-3d">Установить</a></li>
+        <li><a href="https://t.me/VuntgramBot" target="_blank" rel="noopener">Регистрация</a></li>
       </ul>
     </div>
   </header>
 
   <main>
+    <!-- ================= HERO ================= -->
     <section id="about" class="hero">
-      <div class="container hero-inner">
-        <h1 class="hero-title">Частная соцсеть для школьников</h1>
-        <p class="hero-sub">TheVuntgram — это приватная социальная сеть для школьников и студентов, где всё построено вокруг доверия и безопасности.
-Без рекламы, без лишнего шума, только реальное общение с теми, кого ты действительно знаешь.
-Каждый пользователь заходит по пригласительному коду, а все данные шифруются и остаются внутри системы.
-TheVuntgram — пространство, где можно быть собой и не бояться за личную информацию.</p>
-        <a class="btn btn-primary" href="https://t.me/VuntgramBot" target="_blank" rel="noopener">Зарегистрироваться</a>
-      </div>
+      <div class="container hero-grid">
+        <div class="hero-inner">
+          <div class="hero-badge reveal"><span class="dot"></span> Закрытая сеть · вход по коду</div>
 
-      <div class="phone-demo-wrapper">
-        <div class="phone-frame" role="region" aria-label="Демонстрация чата">
-          <div class="phone-top">
-            <button class="back" aria-hidden="true"><</button>
-            <div class="chat-user">
-              <div class="name">Kris Rush</div>
-              <div class="status">Online</div>
+          <h1 class="hero-title reveal">
+            Частная соцсеть <br>
+            <span class="grad-text">для школьников</span>
+          </h1>
+
+          <p class="hero-sub reveal">
+            TheVuntgram — приватная социальная сеть для школьников и студентов, где всё построено
+            вокруг доверия и безопасности. Без рекламы, без лишнего шума — только реальное общение
+            с теми, кого ты действительно знаешь. Каждый заходит по пригласительному коду,
+            а данные шифруются и остаются внутри системы.
+          </p>
+
+          <div class="hero-actions reveal">
+            <a class="btn btn-primary" href="https://t.me/VuntgramBot" target="_blank" rel="noopener">
+              <i class="fas fa-paper-plane"></i> Зарегистрироваться
+            </a>
+            <a class="btn btn-ghost" href="#features">
+              <i class="fas fa-compass"></i> Что внутри
+            </a>
+          </div>
+
+          <div class="hero-stats reveal">
+            <div class="stat"><div class="stat-num" data-count="100">0</div><div class="stat-label">% приватность</div></div>
+            <div class="stat"><div class="stat-num" data-count="0">0</div><div class="stat-label">рекламы</div></div>
+            <div class="stat"><div class="stat-num" data-count="24">0</div><div class="stat-label">/7 поддержка</div></div>
+          </div>
+        </div>
+
+        <!-- ======= ДЕМО ЧАТА (как в приложении) ======= -->
+        <div class="phone-demo-wrapper reveal">
+          <div class="phone-glow" aria-hidden="true"></div>
+
+          <div class="phone-frame" id="phoneFrame" role="region" aria-label="Демонстрация чата">
+            <div class="phone-notch" aria-hidden="true"></div>
+
+            <div class="chat-header">
+              <button class="back-button" type="button" aria-label="Назад"><i class="fas fa-arrow-left"></i></button>
+              <div class="chat-title-container">
+                <div class="chat-title">Kris Rush</div>
+                <div class="chat-status" id="chatStatus"><span class="online-dot"></span>в сети</div>
+              </div>
+              <div class="chat-avatar" style="background-image:url('kr1.jpg')"></div>
             </div>
-            <img class="avatar" role="img" src="kr1.jpg"></img>
+
+            <div class="messages-container" id="phoneChat">
+              <div class="chat-date-chip">сегодня</div>
+
+              <div class="message message-incoming" data-step="1">
+                <div class="message-content">
+                  <span class="message-text">Привет 👋</span>
+                  <span class="message-time">19:41</span>
+                </div>
+              </div>
+
+              <div class="message message-outgoing" data-step="2">
+                <div class="message-content">
+                  <span class="message-text">Привет! Как дела?</span>
+                  <span class="message-time">19:41 <i class="fas fa-check-double status-icon read"></i></span>
+                </div>
+              </div>
+
+              <div class="message message-incoming" data-step="3">
+                <div class="message-content">
+                  <span class="message-text">Всё круто 😎 зарегался тут по коду из школы</span>
+                  <span class="message-time">19:42</span>
+                </div>
+              </div>
+
+              <div class="message message-outgoing" data-step="4">
+                <div class="message-content">
+                  <span class="message-text">Пошли вечером в кино 🎬</span>
+                  <span class="message-time">19:42 <i class="fas fa-check-double status-icon read"></i></span>
+                </div>
+              </div>
+
+              <div class="message message-incoming" data-step="5">
+                <div class="message-content">
+                  <span class="message-text">Давай! 🍿 скинь время в группу</span>
+                  <span class="message-time">19:43</span>
+                </div>
+              </div>
+
+              <div class="typing-bubble" id="typingBubble" aria-hidden="true">
+                <span></span><span></span><span></span>
+              </div>
+            </div>
+
+            <div class="message-input-container">
+              <div class="message-input-wrapper">
+                <button class="attach-button" type="button" aria-label="Прикрепить"><i class="fas fa-paperclip"></i></button>
+                <input class="message-input" id="demoInput" type="text" placeholder="Сообщение" aria-label="Поле сообщения" />
+                <button class="send-button" id="demoSend" type="button" aria-label="Отправить"><i class="fas fa-paper-plane"></i></button>
+              </div>
+            </div>
           </div>
 
-          <div class="phone-chat" id="phoneChat">
-            <div class="message left">Привет 👋</div>
-            <div class="message right">Привет! Как дела?</div>
-            <div class="message left">Всё круто 😎</div>
-            <div class="message right">Пошли вечером в кино 🎬</div>
-            <div class="message left">Давай! 🍿</div>
-          </div>
-
-          <div class="phone-input">
-            <input type="text" placeholder="Сообщение..." aria-label="Поле сообщения">
-            <button class="send" aria-label="Отправить">➤</button>
-          </div>
+          <div class="phone-caption">Так выглядит чат внутри TheVuntgram — можно написать прямо здесь</div>
         </div>
       </div>
     </section>
 
+    <!-- ================= FEATURES ================= -->
     <section id="features" class="features">
       <div class="container">
-        <h2>Что ждёт внутри?</h2>
-        <div class="features-grid">
-          <div class="feature-card">Безопасное общение</div>
-          <div class="feature-card">Закрытый клуб</div>
-          <div class="feature-card">Удобный чат</div>
-          <div class="feature-card">Поддержка 24/7</div>
+        <div class="section-head reveal">
+          <span class="eyebrow">Возможности</span>
+          <h2>Что ждёт внутри?</h2>
+          <p class="section-sub">Всё нужное для общения — и ничего лишнего.</p>
         </div>
-        <section class="about-abilities">
-  <p>
-    <strong>TheVuntgram</strong> — это современный мессенджер нового поколения, созданный специально для школьников и студентов. 
-    Здесь нет рекламы, навязчивых ботов и лишних функций — только простое, защищённое и честное общение. 
-    Внутри платформы можно вести личные переписки, создавать групповые чаты, делиться файлами и впечатлениями, 
-    а главное — быть уверенным, что всё остаётся внутри системы.
-  </p>
 
-  <p>
-    Каждый пользователь имеет свой уникальный ID и внутреннюю почту с доменом <strong>@vibe.ye</strong>, 
-    которая работает исключительно в пределах сети. Благодаря этому исключены спам, внешние рассылки и случайные контакты. 
-    TheVuntgram — это не просто приложение для общения, а цифровое пространство, где каждый может чувствовать себя спокойно.
-  </p>
+        <div class="features-grid">
+          <div class="feature-card reveal">
+            <div class="feature-icon"><i class="fas fa-shield-halved"></i></div>
+            <h3>Безопасное общение</h3>
+            <p>Пароли и данные хранятся в зашифрованном виде, переписки не уходят за пределы платформы.</p>
+          </div>
+          <div class="feature-card reveal">
+            <div class="feature-icon"><i class="fas fa-user-lock"></i></div>
+            <h3>Закрытый клуб</h3>
+            <p>Регистрация только по пригласительному коду — случайных людей и спама здесь нет.</p>
+          </div>
+          <div class="feature-card reveal">
+            <div class="feature-icon"><i class="fas fa-comments"></i></div>
+            <h3>Удобный чат</h3>
+            <p>Личные и групповые чаты, фото и файлы, обои, реакции, редактирование сообщений.</p>
+          </div>
+          <div class="feature-card reveal">
+            <div class="feature-icon"><i class="fas fa-headset"></i></div>
+            <h3>Поддержка 24/7</h3>
+            <p>Живые люди в Telegram: помогут со входом, восстановлением и любым вопросом.</p>
+          </div>
+          <div class="feature-card reveal">
+            <div class="feature-icon"><i class="fas fa-envelope-open-text"></i></div>
+            <h3>Почта @vibe.ye</h3>
+            <p>Внутренний адрес, который работает только в сети — внешние рассылки невозможны.</p>
+          </div>
+          <div class="feature-card reveal">
+            <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+            <h3>Быстро и без рекламы</h3>
+            <p>Лёгкий интерфейс, мгновенная доставка сообщений, ноль баннеров и трекеров.</p>
+          </div>
+        </div>
 
-  <p>
-    Мы сделали всё, чтобы платформа оставалась безопасной, лёгкой и понятной. 
-    Чтобы зарегистрироваться, нужен пригласительный код — это помогает сохранять доверие внутри сообщества 
-    и делает каждый контакт осознанным. 
-    Общайся, узнавай новое, делись идеями — TheVuntgram создан, чтобы объединять.
-  </p>
-</section>
+        <section class="about-abilities reveal">
+          <p>
+            <strong>TheVuntgram</strong> — современный мессенджер нового поколения, созданный специально
+            для школьников и студентов. Здесь нет рекламы, навязчивых ботов и лишних функций — только
+            простое, защищённое и честное общение. Внутри платформы можно вести личные переписки,
+            создавать групповые чаты, делиться файлами и впечатлениями, а главное — быть уверенным,
+            что всё остаётся внутри системы.
+          </p>
+          <p>
+            Каждый пользователь имеет свой уникальный ID и внутреннюю почту с доменом
+            <strong>@vibe.ye</strong>, которая работает исключительно в пределах сети. Благодаря этому
+            исключены спам, внешние рассылки и случайные контакты. TheVuntgram — это не просто приложение
+            для общения, а цифровое пространство, где каждый может чувствовать себя спокойно.
+          </p>
+          <p>
+            Мы сделали всё, чтобы платформа оставалась безопасной, лёгкой и понятной. Чтобы
+            зарегистрироваться, нужен пригласительный код — это помогает сохранять доверие внутри
+            сообщества и делает каждый контакт осознанным. Общайся, узнавай новое, делись идеями —
+            TheVuntgram создан, чтобы объединять.
+          </p>
+        </section>
 
-<div class="carousel-3d" id="carousel-3d">
-  <img src="ft1.png" alt="Скрин 1" class="desktop-screenshot">
-  <img src="11.jpg" alt="Скрин 1" class="mobile-screenshot">
-  <img src="ft2.png" alt="Скрин 2" class="desktop-screenshot">
-  <img src="22.jpg" alt="Скрин 2" class="mobile-screenshot">
-  <img src="ft3.png" alt="Скрин 3" class="desktop-screenshot">
-  <img src="33.jpg" alt="Скрин 3" class="mobile-screenshot">
-  <img src="ft4.png" alt="Скрин 4" class="desktop-screenshot">
-  <img src="44.jpg" alt="Скрин 4" class="mobile-screenshot">
-  <img src="ft5.png" alt="Скрин 5" class="desktop-screenshot">
-  <img src="55.jpg" alt="Скрин 5" class="mobile-screenshot">
-</div>
+        <div class="carousel-3d reveal" id="carousel-3d">
+          <img src="ft1.png" alt="Скрин 1" class="desktop-screenshot">
+          <img src="11.jpg" alt="Скрин 1" class="mobile-screenshot">
+          <img src="ft2.png" alt="Скрин 2" class="desktop-screenshot">
+          <img src="22.jpg" alt="Скрин 2" class="mobile-screenshot">
+          <img src="ft3.png" alt="Скрин 3" class="desktop-screenshot">
+          <img src="33.jpg" alt="Скрин 3" class="mobile-screenshot">
+          <img src="ft4.png" alt="Скрин 4" class="desktop-screenshot">
+          <img src="44.jpg" alt="Скрин 4" class="mobile-screenshot">
+          <img src="ft5.png" alt="Скрин 5" class="desktop-screenshot">
+          <img src="55.jpg" alt="Скрин 5" class="mobile-screenshot">
+        </div>
 
-<div class="install-block big-card" aria-hidden="false">
-  <div class="install-inner container">
-    <div class="install-left">
-      <div class="install-icon" aria-hidden="true">📱</div>
-      <div class="install-copy">
-        <div class="install-title">Установи Vuntgram как приложение</div>
-        <div class="install-sub">Ярлык на главный экран — быстрый доступ и меньше трафика.</div>
-      </div>
-    </div>
-
-    <div class="install-cta">
-      <button id="showInstall" class="btn install-btn" aria-label="Установить Vuntgram">Установить</button>
-    </div>
-  </div>
-</div>
-        
+        <div class="install-block big-card reveal">
+          <div class="install-inner container">
+            <div class="install-left">
+              <div class="install-icon" aria-hidden="true">📱</div>
+              <div class="install-copy">
+                <div class="install-title">Установи Vuntgram как приложение</div>
+                <div class="install-sub">Ярлык на главный экран — быстрый доступ и меньше трафика.</div>
+              </div>
+            </div>
+            <div class="install-cta">
+              <button id="showInstall" class="btn install-btn" aria-label="Установить Vuntgram">Установить</button>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
+    <!-- ================= FAQ ================= -->
     <section id="faq" class="faq">
       <div class="container">
-        <h2>Частые вопросы</h2>
-
-        <div class="faq-item">
-          <button class="faq-question">Как получить код? <span class="arrow">▾</span></button>
-          <div class="faq-answer"><p>Коды выдаются только в школах — это защищает сеть от посторонних.</p></div>
+        <div class="section-head reveal">
+          <span class="eyebrow">FAQ</span>
+          <h2>Частые вопросы</h2>
+          <p class="section-sub">Коротко и по делу о регистрации, безопасности и возможностях.</p>
         </div>
 
-        <div class="faq-item">
-          <button class="faq-question">Зачем нужна почта @vibe.ye? <span class="arrow">▾</span></button>
-          <div class="faq-answer"><p>Это внутренняя почта для общения внутри сети. Она нигде больше не работает.</p></div>
-        </div>
+        <div class="faq-list">
+          <div class="faq-item reveal">
+            <button class="faq-question">Как получить пригласительный код? <span class="arrow"><i class="fas fa-chevron-down"></i></span></button>
+            <div class="faq-answer"><div class="faq-answer-inner">
+              <p>Коды выдаются только в школах — их передаёт представитель платформы или тот, кто уже
+              зарегистрирован и получил приглашения. Это защищает сеть от посторонних: каждый новый
+              человек приходит по чьей-то рекомендации.</p>
+              <p>Код одноразовый и привязывается к аккаунту при регистрации. Если код не сработал —
+              скорее всего, он уже использован; напиши в поддержку, и мы проверим.</p>
+            </div></div>
+          </div>
 
-        <div class="faq-item">
-          <button class="faq-question">Можно ли восстановить доступ? <span class="arrow">▾</span></button>
-          <div class="faq-answer"><p>Да, через службу поддержки — сотрудники помогут восстановить доступ.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question">Что насчёт безопасности данных?<span class="arrow">▾</span></button>
-          <div class="faq-answer"><p>Каждое сообщение хранится безопасно. Мы не передаём данные третьим лицам.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question">Как добавить друга?<span class="arrow">▾</span></button>
-          <div class="faq-answer"><p>Просто введи его ID в поиске. После подтверждения вы сможете общаться в личных чатах.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question">Можно ли использовать TheVuntgram на ПК?<span class="arrow">▾</span></button>
-          <div class="faq-answer"><p>Да. Интерфейс полностью адаптируется под большие экраны — сайт работает одинаково быстро и на телефоне, и на компьютере.</p></div>
-        </div>
+          <div class="faq-item reveal">
+            <button class="faq-question">Зачем нужна почта @vibe.ye? <span class="arrow"><i class="fas fa-chevron-down"></i></span></button>
+            <div class="faq-answer"><div class="faq-answer-inner">
+              <p>Это внутренний адрес, который выдаётся автоматически вместе с аккаунтом. Он работает
+              только внутри TheVuntgram: письма и уведомления не уходят в интернет, а на почту нельзя
+              написать снаружи.</p>
+              <p>Благодаря этому исключены спам, фишинг и рассылки от незнакомцев — а тебе не нужно
+              указывать личный e-mail, чтобы пользоваться платформой.</p>
+            </div></div>
+          </div>
 
+          <div class="faq-item reveal">
+            <button class="faq-question">Можно ли восстановить доступ к аккаунту? <span class="arrow"><i class="fas fa-chevron-down"></i></span></button>
+            <div class="faq-answer"><div class="faq-answer-inner">
+              <p>Да. Напиши в бота поддержки, укажи свой ID или ник — сотрудники зададут несколько
+              проверочных вопросов и помогут вернуть доступ.</p>
+              <p>Пароль мы не видим: он хранится в зашифрованном виде, поэтому восстановление всегда
+              происходит через установку нового пароля, а не через «подсказку старого».</p>
+            </div></div>
+          </div>
+
+          <div class="faq-item reveal">
+            <button class="faq-question">Что насчёт безопасности данных? <span class="arrow"><i class="fas fa-chevron-down"></i></span></button>
+            <div class="faq-answer"><div class="faq-answer-inner">
+              <p>Пароли хранятся только в виде хешей, соединение с сервером идёт по HTTPS, а сообщения
+              и файлы доступны исключительно участникам переписки.</p>
+              <p>Мы не продаём и не передаём данные третьим лицам, не подключаем рекламные трекеры и
+              не собираем ничего, что не нужно для работы платформы.</p>
+            </div></div>
+          </div>
+
+          <div class="faq-item reveal">
+            <button class="faq-question">Как добавить друга? <span class="arrow"><i class="fas fa-chevron-down"></i></span></button>
+            <div class="faq-answer"><div class="faq-answer-inner">
+              <p>Введи его ID или ник в поиске и отправь запрос. Как только человек подтвердит, у вас
+              появится личный чат и вы увидите статусы друг друга.</p>
+              <p>Без подтверждения писать нельзя — так никто не получит сообщений от незнакомых людей.</p>
+            </div></div>
+          </div>
+
+          <div class="faq-item reveal">
+            <button class="faq-question">Можно ли использовать TheVuntgram на ПК? <span class="arrow"><i class="fas fa-chevron-down"></i></span></button>
+            <div class="faq-answer"><div class="faq-answer-inner">
+              <p>Да. Интерфейс полностью адаптируется под большие экраны: слева список чатов, справа
+              переписка. Сайт работает одинаково быстро и на телефоне, и на компьютере.</p>
+              <p>Аккаунт один — сообщения синхронизируются между всеми устройствами, на которых ты вошёл.</p>
+            </div></div>
+          </div>
+
+          <div class="faq-item reveal">
+            <button class="faq-question">Как создать групповой чат? <span class="arrow"><i class="fas fa-chevron-down"></i></span></button>
+            <div class="faq-answer"><div class="faq-answer-inner">
+              <p>В разделе «Чаты» нажми кнопку создания, выбери участников из своих контактов, задай
+              название и, если хочешь, аватар группы.</p>
+              <p>В профиле группы видно участников, медиа и файлы, можно отключить звук уведомлений и
+              управлять участниками.</p>
+            </div></div>
+          </div>
+
+          <div class="faq-item reveal">
+            <button class="faq-question">Сколько это стоит? <span class="arrow"><i class="fas fa-chevron-down"></i></span></button>
+            <div class="faq-answer"><div class="faq-answer-inner">
+              <p>Ничего. Платформа бесплатная, без подписок, платных стикеров и «премиум-функций».
+              Реклама тоже не появится — она противоречит самой идее закрытой сети.</p>
+            </div></div>
+          </div>
+
+          <div class="faq-item reveal">
+            <button class="faq-question">Нужно ли что-то устанавливать? <span class="arrow"><i class="fas fa-chevron-down"></i></span></button>
+            <div class="faq-answer"><div class="faq-answer-inner">
+              <p>Нет, TheVuntgram открывается прямо в браузере. Но можно добавить ярлык на главный
+              экран — тогда платформа запускается как обычное приложение, на весь экран и без адресной
+              строки.</p>
+              <p>Кнопка «Установить» выше подскажет, как это сделать на твоём устройстве.</p>
+            </div></div>
+          </div>
+
+          <div class="faq-item reveal">
+            <button class="faq-question">Что делать, если что-то не работает? <span class="arrow"><i class="fas fa-chevron-down"></i></span></button>
+            <div class="faq-answer"><div class="faq-answer-inner">
+              <p>Сначала обнови страницу и проверь соединение — иногда помогает выход и повторный вход.
+              Если проблема осталась, напиши в поддержку и опиши, что произошло, с какого устройства и
+              когда. Скриншот сильно ускоряет разбор.</p>
+              <p>Платформа активно развивается, поэтому баг-репорты действительно помогают.</p>
+            </div></div>
+          </div>
+        </div>
       </div>
     </section>
+
+    <!-- ================= SUPPORT ================= -->
     <section id="support" class="support-section">
-  <h2>Поддержка TheVuntgram</h2>
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Поддержка</span>
+          <h2>Поддержка TheVuntgram</h2>
+        </div>
 
-  <p class="support-intro">
-    Мы всегда готовы помочь. Если у тебя возникли сложности с регистрацией, входом в систему или использованием платформы — свяжись с нами через бота поддержки.  
-    Команда разработчиков ответит как можно скоро, внимательно и по делу.
-  </p>
+        <p class="support-intro reveal">
+          Мы всегда готовы помочь. Если возникли сложности с регистрацией, входом в систему или
+          использованием платформы — свяжись с нами через бота поддержки. Команда разработчиков
+          ответит как можно скорее, внимательно и по делу.
+        </p>
 
+        <div class="support-methods">
+          <div class="support-item reveal">
+            <h3><i class="fab fa-telegram"></i> Обратная связь в Telegram</h3>
+            <p>Напиши в чат поддержки — это самый быстрый способ:</p>
+            <a href="https://t.me/VuntgramSupport_bot" target="_blank" rel="noopener" class="support-link">@VuntgramSupport_bot</a>
+          </div>
+          <div class="support-item reveal">
+            <h3><i class="fas fa-key"></i> Проблемы со входом</h3>
+            <p>Не подходит пароль или потерян доступ? Пришли свой ID — поможем восстановить аккаунт.</p>
+            <a href="https://t.me/VuntgramSupport_bot" target="_blank" rel="noopener" class="support-link">Восстановить доступ</a>
+          </div>
+          <div class="support-item reveal">
+            <h3><i class="fas fa-bug"></i> Нашёл баг или идею</h3>
+            <p>Опиши, что случилось, и приложи скриншот — мы разбираем каждое сообщение.</p>
+            <a href="https://t.me/VuntgramSupport_bot" target="_blank" rel="noopener" class="support-link">Сообщить о проблеме</a>
+          </div>
+        </div>
 
-    <div class="support-item">
-      <h3>💬 Обратная связь в Telegram</h3>
-      <p>Ты можешь написать в чат поддержки:</p>
-      <a href="https://t.me/VuntgramSupport_bot" target="_blank" class="support-link">@VuntgramSupport_bot</a>
-    </div>
-
-
-  <div class="support-note">
-    <p>❗️Мы никогда не запрашиваем пароли и коды подтверждения. Если Вам кто-то пишет от имени поддержки — напишите нам в телеграмм! </strong>.</p>
-  </div>
-  <div class="support-note">
-    <p><strong>Продукт находится в стадии активной разработки!</strong></p>
-  </div>
-</section>
+        <div class="support-note reveal">
+          <p>❗️ Мы никогда не запрашиваем пароли и коды подтверждения. Если кто-то пишет от имени поддержки и просит их — напиши нам в Telegram.</p>
+        </div>
+        <div class="support-note reveal">
+          <p><strong>Продукт находится в стадии активной разработки!</strong></p>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
-    <div class="container">© 2025 TheVuntgram. Все права защищены.</div>
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="32.png" alt="" class="footer-logo" id="footer-logo">
+        <span>TheVuntgram</span>
+      </div>
+      <div class="footer-links">
+        <a href="#about">О платформе</a>
+        <a href="#faq">FAQ</a>
+        <a href="#support">Поддержка</a>
+        <a href="https://t.me/VuntgramBot" target="_blank" rel="noopener">Регистрация</a>
+      </div>
+      <div class="footer-copy">© 2025 TheVuntgram. Все права защищены.</div>
+    </div>
   </footer>
+
+  <button class="to-top" id="toTop" aria-label="Наверх"><i class="fas fa-arrow-up"></i></button>
 
   <script src="main7q.js"></script>
 </body>
