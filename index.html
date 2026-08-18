@@ -164,22 +164,22 @@ nav{flex:1;margin-left:18px}
   background:var(--card-bg);border:1px solid var(--card-border);border-radius:16px;padding:12px;
   box-shadow:var(--shadow-lg);
 }
-.mobile-nav.open{display:block;animation:dropIn .38s var(--ease)}
+.mobile-nav.open{display:block;animation:dropIn .2s var(--ease)}
 @keyframes dropIn{from{opacity:0;transform:translateY(-12px) scale(.98)}to{opacity:1;transform:none}}
 .mobile-nav ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
 .mobile-nav a{display:block;padding:12px 14px;border-radius:12px;text-decoration:none;color:var(--text);font-weight:600;transition:background .25s ease, transform .25s var(--ease)}
 .mobile-nav a:hover{background:rgba(46,204,113,.1);transform:translateX(4px)}
-.mobile-nav.open li{opacity:0;animation:dropItem .4s var(--ease) forwards}
-.mobile-nav.open li:nth-child(1){animation-delay:.04s}
-.mobile-nav.open li:nth-child(2){animation-delay:.08s}
-.mobile-nav.open li:nth-child(3){animation-delay:.12s}
-.mobile-nav.open li:nth-child(4){animation-delay:.16s}
-.mobile-nav.open li:nth-child(5){animation-delay:.2s}
-.mobile-nav.open li:nth-child(6){animation-delay:.24s}
+.mobile-nav.open li{opacity:0;animation:dropItem .22s var(--ease) forwards}
+.mobile-nav.open li:nth-child(1){animation-delay:.02s}
+.mobile-nav.open li:nth-child(2){animation-delay:.04s}
+.mobile-nav.open li:nth-child(3){animation-delay:.06s}
+.mobile-nav.open li:nth-child(4){animation-delay:.08s}
+.mobile-nav.open li:nth-child(5){animation-delay:.1s}
+.mobile-nav.open li:nth-child(6){animation-delay:.12s}
 @keyframes dropItem{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
 
 /* ===== reveal (появление на скролле) ===== */
-.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease), transform .7s var(--ease)}
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .32s var(--ease), transform .32s var(--ease)}
 .reveal.visible{opacity:1;transform:none}
 
 /* ===== HERO ===== */
@@ -258,7 +258,7 @@ body.dark .phone-home-indicator{background:rgba(255,255,255,.55)}
   display:flex;align-items:center;padding:14px 14px 12px;gap:2px;
   background:#fff;border-bottom:1px solid rgba(0,0,0,.08);
   height:64px;min-height:64px;position:relative;z-index:110;
-  animation:slideInDown .5s var(--ease) both
+  animation:slideInDown .28s var(--ease) both
 }
 body.dark .phone-frame .chat-header{background:#1e1e1e;border-bottom-color:rgba(255,255,255,.1)}
 .phone-frame .back-button{
@@ -305,7 +305,7 @@ body.dark .phone-frame::before{filter:brightness(.32) saturate(.9)}
   word-wrap:break-word;box-shadow:0 2px 6px rgba(0,0,0,.12);
   opacity:0;transform:translateY(18px)
 }
-.message.shown{animation:msgIn .45s var(--ease) forwards}
+.message.shown{animation:msgIn .28s var(--ease) forwards}
 .message-incoming{align-self:flex-start;background:#fff;color:#1a1a1a;border-bottom-left-radius:8px}
 .message-incoming.shown{animation-name:msgInLeft}
 .message-outgoing{
@@ -335,7 +335,7 @@ body.dark .message-incoming .message-time{color:rgba(255,255,255,.55)}
   background:#fff;padding:11px 14px;border-radius:18px;border-bottom-left-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,.12)
 }
 body.dark .typing-bubble{background:#1e1e1e}
-.typing-bubble.active{display:inline-flex;animation:msgInLeft .35s var(--ease) both}
+.typing-bubble.active{display:inline-flex;animation:msgInLeft .22s var(--ease) both}
 .typing-bubble span{width:7px;height:7px;border-radius:50%;background:var(--hint);animation:typing 1.2s infinite}
 .typing-bubble span:nth-child(2){animation-delay:.15s}
 .typing-bubble span:nth-child(3){animation-delay:.3s}
@@ -476,9 +476,9 @@ body.dark .message-input::placeholder{color:rgba(255,255,255,.5)}
   font-size:12px;background:rgba(46,204,113,.12);color:var(--primary);transition:transform .4s var(--ease), background .3s
 }
 .faq-item.active .arrow{transform:rotate(180deg);background:var(--primary);color:#fff}
-.faq-answer{max-height:0;overflow:hidden;transition:max-height .5s var(--ease)}
+.faq-answer{max-height:0;overflow:hidden;transition:max-height .3s var(--ease)}
 .faq-answer-inner{padding:0 20px 4px;color:var(--muted);font-size:15px;line-height:1.7}
-.faq-item.active .faq-answer-inner{padding-bottom:18px;animation:fadeUpSmall .5s var(--ease)}
+.faq-item.active .faq-answer-inner{padding-bottom:18px;animation:fadeUpSmall .28s var(--ease)}
 .faq-answer-inner p{margin:0 0 10px}
 .faq-answer-inner p:last-child{margin-bottom:0}
 @keyframes fadeUpSmall{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
@@ -708,7 +708,7 @@ body.dark .message-input::placeholder{color:rgba(255,255,255,.5)}
             <div class="chat-header">
               <button class="back-button" type="button" aria-label="Назад"><i class="fas fa-arrow-left"></i></button>
               <div class="chat-title-container">
-                <div class="chat-title">Kris Rush</div>
+                <div class="chat-title">Eva</div>
                 <div class="chat-status" id="chatStatus"><span class="online-dot"></span>в сети</div>
               </div>
               <div class="chat-avatar" style="background-image:url('kr1.jpg')"></div>
@@ -1179,7 +1179,7 @@ body.dark .message-input::placeholder{color:rgba(255,255,255,.5)}
         if (!en.isIntersecting) return;
         const siblings = Array.from(en.target.parentElement.children).filter(c => c.classList.contains('reveal'));
         const idx = Math.max(0, siblings.indexOf(en.target));
-        en.target.style.transitionDelay = Math.min(idx * 80, 480) + 'ms';
+        en.target.style.transitionDelay = Math.min(idx * 30, 150) + 'ms';
         en.target.classList.add('visible');
         obs.unobserve(en.target);
       });
