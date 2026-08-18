@@ -222,16 +222,6 @@ nav{flex:1;margin-left:18px}
 .btn-ghost:hover{transform:translateY(-3px);color:var(--primary);box-shadow:0 16px 34px rgba(0,0,0,.12)}
 .btn:active{transform:translateY(-1px) scale(.98)}
 
-.hero-stats{display:flex;gap:14px;flex-wrap:wrap}
-.stat{
-  min-width:104px;padding:14px 18px;border-radius:16px;background:var(--card-bg);
-  border:1px solid var(--card-border);box-shadow:var(--shadow-soft);
-  transition:transform .35s var(--ease), box-shadow .35s ease
-}
-.stat:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
-.stat-num{font-size:24px;font-weight:900;color:var(--primary);line-height:1}
-.stat-label{font-size:12px;color:var(--muted);margin-top:4px;font-weight:600}
-
 /* ===== ДЕМО ЧАТА (как в приложении) ===== */
 .phone-demo-wrapper{position:relative;display:flex;flex-direction:column;align-items:center;padding:10px 0}
 .phone-glow{
@@ -256,13 +246,6 @@ nav{flex:1;margin-left:18px}
 }
 @keyframes floatPhone{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 .phone-frame:hover{animation-play-state:paused;transform:translateY(-10px) scale(1.012)}
-
-/* «остров»/камера — СВЕРХУ */
-.phone-notch{
-  position:absolute;top:7px;left:50%;transform:translateX(-50%);
-  width:84px;height:19px;border-radius:99px;background:#0b0b0d;
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);z-index:130
-}
 /* индикатор «Домой» — СНИЗУ */
 .phone-home-indicator{
   position:absolute;bottom:7px;left:50%;transform:translateX(-50%);
@@ -550,7 +533,7 @@ body.dark .message-input::placeholder{color:rgba(255,255,255,.5)}
   .hero-grid{grid-template-columns:1fr;gap:28px}
   .hero-inner{text-align:center}
   .hero-sub{margin-left:auto;margin-right:auto}
-  .hero-actions,.hero-stats{justify-content:center}
+  .hero-actions{justify-content:center}
   .features-grid{grid-template-columns:repeat(2,1fr)}
   .carousel-3d{height:420px}
   .carousel-3d img{width:600px}
@@ -589,7 +572,6 @@ body.dark .message-input::placeholder{color:rgba(255,255,255,.5)}
   .hero-sub{font-size:14.5px}
   .phone-frame{width:min(300px,92vw)}
   .message-content{font-size:14px}
-  .stat{min-width:92px;padding:12px 14px}
   .container{padding:0 14px}
   .carousel-3d{height:290px}
   .carousel-3d .mobile-screenshot{width:155px!important}
@@ -627,7 +609,7 @@ body.dark .message-input::placeholder{color:rgba(255,255,255,.5)}
 
 /* touch-устройства: убираем hover-подпрыгивания, увеличиваем тап-зоны */
 @media (hover:none) and (pointer:coarse){
-  .btn:hover,.feature-card:hover,.support-item:hover,.faq-item:hover,.stat:hover{transform:none}
+  .btn:hover,.feature-card:hover,.support-item:hover,.faq-item:hover{transform:none}
   .phone-frame:hover{transform:none}
   .send-button:hover,.attach-button:hover,.theme-btn:hover,.logo:hover img{transform:none}
   .faq-question,.mobile-nav a{min-height:46px}
@@ -715,12 +697,6 @@ body.dark .message-input::placeholder{color:rgba(255,255,255,.5)}
               <i class="fas fa-compass"></i> Что внутри
             </a>
           </div>
-
-          <div class="hero-stats reveal">
-            <div class="stat"><div class="stat-num" data-count="100">0</div><div class="stat-label">% приватность</div></div>
-            <div class="stat"><div class="stat-num" data-count="0">0</div><div class="stat-label">рекламы</div></div>
-            <div class="stat"><div class="stat-num" data-count="24">0</div><div class="stat-label">/7 поддержка</div></div>
-          </div>
         </div>
 
         <!-- ======= ДЕМО ЧАТА (как в приложении) ======= -->
@@ -728,7 +704,6 @@ body.dark .message-input::placeholder{color:rgba(255,255,255,.5)}
           <div class="phone-glow" aria-hidden="true"></div>
 
           <div class="phone-frame" id="phoneFrame" role="region" aria-label="Демонстрация чата">
-            <div class="phone-notch" aria-hidden="true"></div>
 
             <div class="chat-header">
               <button class="back-button" type="button" aria-label="Назад"><i class="fas fa-arrow-left"></i></button>
@@ -1212,30 +1187,6 @@ body.dark .message-input::placeholder{color:rgba(255,255,255,.5)}
     revealEls.forEach(el => io.observe(el));
   } else {
     revealEls.forEach(el => el.classList.add('visible'));
-  }
-
-  /* ---------- СЧЁТЧИКИ В HERO ---------- */
-  const counters = document.querySelectorAll('.stat-num');
-  const runCounter = (el) => {
-    const target = parseInt(el.dataset.count, 10) || 0;
-    if (target === 0) { el.textContent = '0'; return; }
-    const duration = 1300;
-    const start = performance.now();
-    const step = (now) => {
-      const p = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - p, 3);
-      el.textContent = Math.round(target * eased);
-      if (p < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  };
-  if ('IntersectionObserver' in window) {
-    const co = new IntersectionObserver((entries, obs) => {
-      entries.forEach(en => { if (en.isIntersecting) { runCounter(en.target); obs.unobserve(en.target); } });
-    }, { threshold: 0.5 });
-    counters.forEach(c => co.observe(c));
-  } else {
-    counters.forEach(c => c.textContent = c.dataset.count);
   }
 
   /* ---------- FAQ ---------- */
