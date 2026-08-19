@@ -174,6 +174,23 @@ nav{flex:1;margin-left:18px}
 .reveal{opacity:0;transform:translateY(18px);will-change:opacity,transform;transition:opacity .62s var(--ease-soft), transform .62s var(--ease-soft)}
 .reveal.visible{opacity:1;transform:none;will-change:auto}
 
+/* Плавное и быстрое появление в разделах «Что ждёт внутри?», «Частые вопросы», «Поддержка».
+   Короткий ход, мягкая ease-out кривая — без эффекта «падающих кубиков». */
+#features .reveal,
+#faq .reveal,
+#support .reveal{
+  transform:translate3d(0,10px,0);
+  transition:opacity .34s cubic-bezier(.33,1,.68,1), transform .38s cubic-bezier(.33,1,.68,1), box-shadow .35s ease, border-color .3s ease;
+}
+#features .reveal.visible,
+#faq .reveal.visible,
+#support .reveal.visible{transform:translate3d(0,0,0)}
+/* карточки/вопросы двигаются ещё меньше — только мягкое проявление */
+#features .feature-card,
+#faq .faq-item,
+#support .support-item,
+#support .support-note{transform:translate3d(0,8px,0)}
+
 .hero{padding:64px 0 40px;position:relative}
 .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:42px;align-items:center}
 .hero-inner{text-align:left}
@@ -1133,11 +1150,15 @@ body.dark .message-input::placeholder{color:rgba(255,255,255,.5)}
         if (!en.isIntersecting) return;
         const siblings = Array.from(en.target.parentElement.children).filter(c => c.classList.contains('reveal'));
         const idx = Math.max(0, siblings.indexOf(en.target));
-        en.target.style.transitionDelay = Math.min(idx * 55, 280) + 'ms';
+        // в features / faq / support — короткий и мягкий каскад, чтобы не было «падающих кубиков»
+        const fast = en.target.closest('#features, #faq, #support');
+        en.target.style.transitionDelay = fast
+          ? Math.min(idx * 28, 110) + 'ms'
+          : Math.min(idx * 55, 280) + 'ms';
         en.target.classList.add('visible');
         obs.unobserve(en.target);
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    }, { threshold: 0.04, rootMargin: '0px 0px -2% 0px' });
     revealEls.forEach(el => io.observe(el));
   } else {
     revealEls.forEach(el => el.classList.add('visible'));
