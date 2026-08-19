@@ -174,22 +174,69 @@ nav{flex:1;margin-left:18px}
 .reveal{opacity:0;transform:translateY(18px);will-change:opacity,transform;transition:opacity .62s var(--ease-soft), transform .62s var(--ease-soft)}
 .reveal.visible{opacity:1;transform:none;will-change:auto}
 
-/* Плавное и быстрое появление в разделах «Что ждёт внутри?», «Частые вопросы», «Поддержка».
-   Короткий ход, мягкая ease-out кривая — без эффекта «падающих кубиков». */
+/* «Песочное» появление в разделах «Что ждёт внутри?», «Частые вопросы», «Поддержка».
+   Элемент проявляется из мягкого расфокуса с зернистой пеленой, которая оседает. */
 #features .reveal,
 #faq .reveal,
 #support .reveal{
-  transform:translate3d(0,10px,0);
-  transition:opacity .34s cubic-bezier(.33,1,.68,1), transform .38s cubic-bezier(.33,1,.68,1), box-shadow .35s ease, border-color .3s ease;
+  position:relative;
+  opacity:0;
+  transform:translate3d(0,12px,0) scale(.994);
+  filter:blur(10px);
+  transition:
+    opacity .9s cubic-bezier(.16,1,.3,1),
+    transform 1.05s cubic-bezier(.16,1,.3,1),
+    filter .85s cubic-bezier(.16,1,.3,1),
+    box-shadow .4s ease,
+    border-color .35s ease;
 }
 #features .reveal.visible,
 #faq .reveal.visible,
-#support .reveal.visible{transform:translate3d(0,0,0)}
-/* карточки/вопросы двигаются ещё меньше — только мягкое проявление */
+#support .reveal.visible{
+  opacity:1;
+  transform:translate3d(0,0,0) scale(1);
+  filter:blur(0);
+}
+/* карточки/вопросы двигаются ещё меньше — почти чистое проявление */
 #features .feature-card,
 #faq .faq-item,
 #support .support-item,
-#support .support-note{transform:translate3d(0,8px,0)}
+#support .support-note{transform:translate3d(0,9px,0) scale(.996)}
+
+/* Песчинки: зерно поверх блока, которое рассеивается */
+#features .reveal.sandy::before,
+#faq .reveal.sandy::before,
+#support .reveal.sandy::before{
+  content:"";
+  position:absolute;
+  inset:-6px;
+  z-index:3;
+  pointer-events:none;
+  border-radius:inherit;
+  opacity:0;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='180' height='180' filter='url(%23n)' opacity='0.55'/></svg>");
+  background-size:180px 180px;
+  mix-blend-mode:soft-light;
+}
+#features .reveal.sandy.visible::before,
+#faq .reveal.sandy.visible::before,
+#support .reveal.sandy.visible::before{
+  animation:sandSettle 1.15s cubic-bezier(.16,1,.3,1) var(--sand-delay,0ms) forwards;
+}
+@keyframes sandSettle{
+  0%{opacity:.85;transform:translate3d(0,-6px,0) scale(1.04);filter:blur(.6px)}
+  45%{opacity:.42;transform:translate3d(0,2px,0) scale(1.01)}
+  100%{opacity:0;transform:translate3d(0,8px,0) scale(1);filter:blur(2px)}
+}
+
+body.dark #features .reveal.sandy::before,
+body.dark #faq .reveal.sandy::before,
+body.dark #support .reveal.sandy::before{mix-blend-mode:overlay}
+
+@media (prefers-reduced-motion:reduce){
+  #features .reveal,#faq .reveal,#support .reveal{filter:none;transform:none;opacity:1}
+  #features .reveal.sandy::before,#faq .reveal.sandy::before,#support .reveal.sandy::before{display:none}
+}
 
 .hero{padding:64px 0 40px;position:relative}
 .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:42px;align-items:center}
@@ -1150,11 +1197,20 @@ body.dark .message-input::placeholder{color:rgba(255,255,255,.5)}
         if (!en.isIntersecting) return;
         const siblings = Array.from(en.target.parentElement.children).filter(c => c.classList.contains('reveal'));
         const idx = Math.max(0, siblings.indexOf(en.target));
-        // в features / faq / support — короткий и мягкий каскад, чтобы не было «падающих кубиков»
-        const fast = en.target.closest('#features, #faq, #support');
-        en.target.style.transitionDelay = fast
-          ? Math.min(idx * 28, 110) + 'ms'
+        // в features / faq / support — мягкое «песочное» проявление с лёгким каскадом
+        const sandy = en.target.closest('#features, #faq, #support');
+        en.target.style.transitionDelay = sandy
+          ? Math.min(idx * 45, 200) + 'ms'
           : Math.min(idx * 55, 280) + 'ms';
+        if (sandy) {
+          en.target.classList.add('sandy');
+          en.target.style.setProperty('--sand-delay', Math.min(idx * 45, 200) + 'ms');
+          // снимаем blur/зерно с композитора после анимации
+          setTimeout(() => {
+            en.target.style.filter = '';
+            en.target.style.willChange = 'auto';
+          }, 1500 + Math.min(idx * 45, 200));
+        }
         en.target.classList.add('visible');
         obs.unobserve(en.target);
       });
